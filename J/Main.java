@@ -17,6 +17,16 @@ class Graph {
         adj.get(w).add(v); 
     }
 
+    public void BFS(int s) {
+        boolean[] visited = new boolean[V];
+        visited[s] = true;
+        ArrayList<Integer> currentLevel = new ArrayList<>();
+        currentLevel.add(s);
+        System.out.print("BFS: ");
+        BFSRec(currentLevel, visited);
+        System.out.println();
+    }
+
     private void BFSRec(ArrayList<Integer> currentLevel, boolean[] visited) {
         if (currentLevel.isEmpty()) return;
 
@@ -33,13 +43,14 @@ class Graph {
         BFSRec(nextLevel, visited);
     }
 
-    public void BFS(int s) {
+    public void DFS() {
         boolean[] visited = new boolean[V];
-        visited[s] = true;
-        ArrayList<Integer> currentLevel = new ArrayList<>();
-        currentLevel.add(s);
-        System.out.print("BFS: ");
-        BFSRec(currentLevel, visited);
+        System.out.print("DFS: ");
+        for (int i = 0; i < V; i++) {
+            if (!visited[i]) {
+                DFSRec(i, visited);
+            }
+        }
         System.out.println();
     }
 
@@ -51,17 +62,6 @@ class Graph {
                 DFSRec(neighbor, visited);
             }
         }
-    }
-
-    public void DFS() {
-        boolean[] visited = new boolean[V];
-        System.out.print("DFS: ");
-        for (int i = 0; i < V; i++) {
-            if (!visited[i]) {
-                DFSRec(i, visited);
-            }
-        }
-        System.out.println();
     }
 }
 

@@ -415,3 +415,307 @@ public class CurrencyConverterController {
     </apex:form>
 </apex:page>
 
+
+
+6. Array Addition
+Apex Class:
+
+apex
+Copy
+Edit
+public class ArrayAdditionController {
+    public List<Integer> array1 {get; set;}
+    public List<Integer> array2 {get; set;}
+    public List<Integer> resultArray {get; set;}
+    
+    public ArrayAdditionController() {
+        array1 = new List<Integer>();
+        array2 = new List<Integer>();
+        resultArray = new List<Integer>();
+    }
+    
+    public void addArrays() {
+        resultArray.clear();
+        if (array1.size() == array2.size()) {
+            for (Integer i = 0; i < array1.size(); i++) {
+                resultArray.add(array1[i] + array2[i]);
+            }
+        }
+    }
+}
+Visualforce Page:
+
+html
+Copy
+Edit
+<apex:page controller="ArrayAdditionController">
+    <h2>Array Addition</h2>
+    <apex:form>
+        <p>Enter comma-separated Array 1: <apex:inputText value="{!array1}" /></p>
+        <p>Enter comma-separated Array 2: <apex:inputText value="{!array2}" /></p>
+        <apex:commandButton value="Add Arrays" action="{!addArrays}"/>
+        <apex:outputPanel rendered="{!NOT(ISNULL(resultArray))}">
+            <p>Result: {!resultArray}</p>
+        </apex:outputPanel>
+    </apex:form>
+</apex:page>
+2️⃣ Area of Geometry
+Apex Class:
+
+apex
+Copy
+Edit
+public class AreaCalculatorController {
+    public Decimal radius {get; set;}
+    public Decimal length {get; set;}
+    public Decimal breadth {get; set;}
+    public Decimal areaCircle {get; set;}
+    public Decimal areaRectangle {get; set;}
+    
+    public void calculateCircleArea() {
+        areaCircle = Math.PI * radius * radius;
+    }
+    
+    public void calculateRectangleArea() {
+        areaRectangle = length * breadth;
+    }
+}
+Visualforce Page:
+
+html
+Copy
+Edit
+<apex:page controller="AreaCalculatorController">
+    <h2>Area Calculator</h2>
+    <apex:form>
+        <p>Circle Radius: <apex:inputText value="{!radius}" /></p>
+        <apex:commandButton value="Calculate Circle Area" action="{!calculateCircleArea}"/>
+        <p>Area of Circle: {!areaCircle}</p>
+        
+        <p>Rectangle Length: <apex:inputText value="{!length}" /></p>
+        <p>Rectangle Breadth: <apex:inputText value="{!breadth}" /></p>
+        <apex:commandButton value="Calculate Rectangle Area" action="{!calculateRectangleArea}"/>
+        <p>Area of Rectangle: {!areaRectangle}</p>
+    </apex:form>
+</apex:page>
+3️⃣ Simple & Compound Interest
+Apex Class:
+
+apex
+Copy
+Edit
+public class InterestCalculatorController {
+    public Decimal principal {get; set;}
+    public Decimal rate {get; set;}
+    public Decimal time {get; set;}
+    public Decimal si {get; set;}
+    public Decimal ci {get; set;}
+    
+    public void calculateInterest() {
+        si = (principal * rate * time) / 100;
+        ci = principal * (Math.pow(1 + (rate / 100), time)) - principal;
+    }
+}
+Visualforce Page:
+
+html
+Copy
+Edit
+<apex:page controller="InterestCalculatorController">
+    <h2>Interest Calculator</h2>
+    <apex:form>
+        <p>Principal: <apex:inputText value="{!principal}" /></p>
+        <p>Rate (%): <apex:inputText value="{!rate}" /></p>
+        <p>Time (years): <apex:inputText value="{!time}" /></p>
+        <apex:commandButton value="Calculate" action="{!calculateInterest}"/>
+        <p>Simple Interest: {!si}</p>
+        <p>Compound Interest: {!ci}</p>
+    </apex:form>
+</apex:page>
+4️⃣ Prime Number Check
+Apex Class:
+
+apex
+Copy
+Edit
+public class PrimeCheckerController {
+    public Integer number {get; set;}
+    public String result {get; set;}
+    
+    public void checkPrime() {
+        if (number <= 1) {
+            result = 'Not Prime';
+            return;
+        }
+        for (Integer i = 2; i <= Math.sqrt(number); i++) {
+            if (number % i == 0) {
+                result = 'Not Prime';
+                return;
+            }
+        }
+        result = 'Prime';
+    }
+}
+Visualforce Page:
+
+html
+Copy
+Edit
+<apex:page controller="PrimeCheckerController">
+    <h2>Prime Number Checker</h2>
+    <apex:form>
+        <p>Enter Number: <apex:inputText value="{!number}" /></p>
+        <apex:commandButton value="Check" action="{!checkPrime}"/>
+        <p>Result: {!result}</p>
+    </apex:form>
+</apex:page>
+5️⃣ Fibonacci Series
+Apex Class:
+
+apex
+Copy
+Edit
+public class FibonacciController {
+    public Integer count {get; set;}
+    public List<Integer> fibSeries {get; set;}
+    
+    public void generateSeries() {
+        fibSeries = new List<Integer>();
+        Integer a = 0, b = 1;
+        if (count >= 1) fibSeries.add(a);
+        if (count >= 2) fibSeries.add(b);
+        for (Integer i = 2; i < count; i++) {
+            Integer next = a + b;
+            fibSeries.add(next);
+            a = b;
+            b = next;
+        }
+    }
+}
+Visualforce Page:
+
+html
+Copy
+Edit
+<apex:page controller="FibonacciController">
+    <h2>Fibonacci Series</h2>
+    <apex:form>
+        <p>Count: <apex:inputText value="{!count}" /></p>
+        <apex:commandButton value="Generate" action="{!generateSeries}"/>
+        <p>Series: {!fibSeries}</p>
+    </apex:form>
+</apex:page>
+6️⃣ Matrix Addition
+Apex Class:
+
+apex
+Copy
+Edit
+public class MatrixAdditionController {
+    public List<List<Integer>> matrix1 {get; set;}
+    public List<List<Integer>> matrix2 {get; set;}
+    public List<List<Integer>> resultMatrix {get; set;}
+    
+    public MatrixAdditionController() {
+        matrix1 = new List<List<Integer>>{
+            new List<Integer>{1,2},
+            new List<Integer>{3,4}
+        };
+        matrix2 = new List<List<Integer>>{
+            new List<Integer>{5,6},
+            new List<Integer>{7,8}
+        };
+        resultMatrix = new List<List<Integer>>();
+    }
+    
+    public void addMatrices() {
+        resultMatrix.clear();
+        for (Integer i = 0; i < matrix1.size(); i++) {
+            List<Integer> row = new List<Integer>();
+            for (Integer j = 0; j < matrix1[i].size(); j++) {
+                row.add(matrix1[i][j] + matrix2[i][j]);
+            }
+            resultMatrix.add(row);
+        }
+    }
+}
+Visualforce Page:
+
+html
+Copy
+Edit
+<apex:page controller="MatrixAdditionController">
+    <h2>Matrix Addition (2x2)</h2>
+    <apex:form>
+        <apex:commandButton value="Add Matrices" action="{!addMatrices}"/>
+        <apex:outputPanel rendered="{!NOT(ISNULL(resultMatrix))}">
+            <p>Result:</p>
+            <apex:repeat value="{!resultMatrix}" var="row">
+                <p>
+                    <apex:repeat value="{!row}" var="col">
+                        {!col} &nbsp;
+                    </apex:repeat>
+                </p>
+            </apex:repeat>
+        </apex:outputPanel>
+    </apex:form>
+</apex:page>
+7️⃣ Matrix Multiplication
+Apex Class:
+
+apex
+Copy
+Edit
+public class MatrixMultiplicationController {
+    public List<List<Integer>> matrix1 {get; set;}
+    public List<List<Integer>> matrix2 {get; set;}
+    public List<List<Integer>> resultMatrix {get; set;}
+    
+    public MatrixMultiplicationController() {
+        matrix1 = new List<List<Integer>>{
+            new List<Integer>{1,2},
+            new List<Integer>{3,4}
+        };
+        matrix2 = new List<List<Integer>>{
+            new List<Integer>{5,6},
+            new List<Integer>{7,8}
+        };
+        resultMatrix = new List<List<Integer>>();
+    }
+    
+    public void multiplyMatrices() {
+        resultMatrix.clear();
+        for (Integer i = 0; i < matrix1.size(); i++) {
+            List<Integer> row = new List<Integer>();
+            for (Integer j = 0; j < matrix2[0].size(); j++) {
+                Integer sum = 0;
+                for (Integer k = 0; k < matrix2.size(); k++) {
+                    sum += matrix1[i][k] * matrix2[k][j];
+                }
+                row.add(sum);
+            }
+            resultMatrix.add(row);
+        }
+    }
+}
+Visualforce Page:
+
+html
+Copy
+Edit
+<apex:page controller="MatrixMultiplicationController">
+    <h2>Matrix Multiplication (2x2)</h2>
+    <apex:form>
+        <apex:commandButton value="Multiply Matrices" action="{!multiplyMatrices}"/>
+        <apex:outputPanel rendered="{!NOT(ISNULL(resultMatrix))}">
+            <p>Result:</p>
+            <apex:repeat value="{!resultMatrix}" var="row">
+                <p>
+                    <apex:repeat value="{!row}" var="col">
+                        {!col} &nbsp;
+                    </apex:repeat>
+                </p>
+            </apex:repeat>
+        </apex:outputPanel>
+    </apex:form>
+</apex:page>

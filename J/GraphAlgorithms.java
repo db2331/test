@@ -3,8 +3,7 @@ import java.util.*;
 public class GraphAlgorithms {
 
     static final int MAX = 100;
-    
-    // Function to find the vertex with the minimum key value
+
     public static int minKey(int key[], boolean mstSet[], int V) {
         int min = Integer.MAX_VALUE;
         int minIndex = -1;
@@ -17,7 +16,6 @@ public class GraphAlgorithms {
         return minIndex;
     }
 
-    // Function to implement Prim's algorithm for MST
     public static void primMST(int[][] graph, int V) {
         int[] parent = new int[V];
         int[] key = new int[V];
@@ -46,7 +44,6 @@ public class GraphAlgorithms {
         }
     }
 
-    // Function to implement Dijkstra's algorithm for shortest path
     public static void dijkstra(int[][] graph, int V, int src) {
         int[] dist = new int[V];
         Arrays.fill(dist, Integer.MAX_VALUE);
@@ -66,7 +63,6 @@ public class GraphAlgorithms {
             }
         }
 
-        // Display the shortest paths
         System.out.println("Dijkstra's Shortest Path:");
         System.out.println("Vertex \t Distance from Source");
         for (int i = 0; i < V; i++) {
@@ -77,12 +73,10 @@ public class GraphAlgorithms {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        // Input number of vertices
         System.out.print("Enter the number of vertices: ");
         int V = sc.nextInt();
         int[][] graph = new int[MAX][MAX];
 
-        // Input adjacency matrix
         System.out.println("Enter the adjacency matrix (use 0 for no edge):");
         for (int i = 0; i < V; i++) {
             for (int j = 0; j < V; j++) {
@@ -90,7 +84,6 @@ public class GraphAlgorithms {
             }
         }
 
-        // Menu for algorithm selection
         System.out.println("\nSelect the algorithm to run:");
         System.out.println("1. Prim's Minimal Spanning Tree");
         System.out.println("2. Dijkstra's Single-Source Shortest Path");
@@ -113,7 +106,6 @@ public class GraphAlgorithms {
         sc.close();
     }
 
-    // Pair class to help with the priority queue in Dijkstra's algorithm
     static class Pair {
         int dist;
         int vertex;
